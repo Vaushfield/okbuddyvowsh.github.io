@@ -74,19 +74,67 @@ h2 {
   background-size: cover;
 }
 
-.arrow{
+.arrow {
   width: 15vh;
   vertical-align: bottom;
 }
 
-.disc-text{
+.disc-text {
   display: inline;
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
 }
 
-.disclaimer{
+.disclaimer {
   position: absolute;
-  top:max(400px,60vh);
+  top: max(400px, 60vh);
   left: min(max(200px, 30vh), 25vw);
+}
+
+.post {
+  border: max(1px, 0.2vh) solid rgb(60, 60, 60);
+  width: 640px;
+  background: rgb(50, 50, 50);
+  margin: 9vh auto;
+  border-radius: 1vh;
+  padding: 2vh;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.08ch;
+}
+
+.title {
+  color: white;
+  margin: 0;
+  display: inline-block;
+}
+
+.dot {
+  padding-left: 0.5vh;
+  padding-right: 0.5vh;
+  color: white;
+  margin: 0;
+  display: inline-block;
+}
+
+.flair{
+  margin-bottom: 0.5vh;
+  display: inline-block;
+  vertical-align: bottom;
+  height: 1rem;
+}
+
+details{
+  color: white;
+  height: 1rem;
+}
+
+.button {
+  border: max(1px, 0.2vh) solid rgb(54, 61, 85);
+  background: rgb(49, 52, 63);
+  width: 8ch;
+  margin-top: 1.5vh;
+  border-radius: 1vh;
+  padding: 1vh;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.08ch;
 }
