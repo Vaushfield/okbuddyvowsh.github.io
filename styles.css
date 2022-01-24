@@ -87,6 +87,6 @@ h2 {
 
 .disclaimer{
   position: absolute;
-  top:min(400px,60vh);
+  top:max(400px,60vh);
   left: min(max(200px, 30vh), 25vw);
 }
