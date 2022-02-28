@@ -41,7 +41,7 @@
       <div class="line"></div>
     </header>
       <ul class="menu">
-      <li><input type="checkbox" onclick="swap()"><h3>Scroll to Zoom</h3><h4 style="margin-left: 1vh; color: rgb(155, 155, 155);">( janky )</h4></li>
+      <li><input type="checkbox" onclick="swap()"><h3>Scroll to Zoom</h3></li>
       <li><input type="checkbox" onclick="swap1()"><h3>Lib Mode</h3></li>
       <li><input type="checkbox" onclick="swap2()"><h3>Remember Preferences</h3></li>
     </ul>
@@ -52,7 +52,7 @@
     <div style="height: 10vh;"></div>
     <div class="post" data-show-post="0"><div class="container">
                       <div style="padding: max(1.2rem ,1.6vh + 0.6rem);">
-                      <h3 class="updoot">644</h3>
+                      <h3 class="updoot">642</h3>
                       <h3 class="title">real shit??!!?!</h3>
                       <h5 class="author">u/SlobsterMccrackenjr</h5>
                       
@@ -66,7 +66,7 @@
     </div>
     <div class="post" data-show-post="0"><div class="container">
                       <div style="padding: max(1.2rem ,1.6vh + 0.6rem);">
-                      <h3 class="updoot">559</h3>
+                      <h3 class="updoot">560</h3>
                       <h3 class="title">I will be going on Fox News in 15 minutes to represent the okbuddyvowsh movement 👍</h3>
                       <h5 class="author">u/852derek852</h5>
                       <h4 class="dot">•</h4><img src="./Hooba Booba.png" class="flair">
@@ -80,7 +80,7 @@
     </div>
     <div class="post" data-show-post="0"><div class="container">
                       <div style="padding: max(1.2rem ,1.6vh + 0.6rem);">
-                      <h3 class="updoot">552</h3>
+                      <h3 class="updoot">553</h3>
                       <h3 class="title">okbuddyvowsh superiority</h3>
                       <h5 class="author">u/sexualrose</h5>
                       
@@ -94,7 +94,7 @@
     </div>
     <div class="post" data-show-post="0"><div class="container">
                       <div style="padding: max(1.2rem ,1.6vh + 0.6rem);">
-                      <h3 class="updoot">411</h3>
+                      <h3 class="updoot">413</h3>
                       <h3 class="title">Vowsh Thought</h3>
                       <h5 class="author">u/KnobheadCreative</h5>
                       
@@ -106,7 +106,7 @@
                       </div>
                       </div>
     </div>
-  </body>
+</body>
   <script>
     post =-1;
     settList = document.querySelectorAll("input");
@@ -178,20 +178,39 @@
       menu.setAttribute("data-settings",sett);
     }
 
+    var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+    function preventDefault(e) {
+      e.preventDefault();
+    }
+
+    function preventDefaultForScrollKeys(e) {
+      if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+      }
+    }
+
+    // modern Chrome requires { passive: false } when adding event
+    var supportsPassive = false;
+    try {
+      window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+        get: function () { supportsPassive = true; } 
+      }));
+    } catch(e) {}
+
+    var wheelOpt = supportsPassive ? { passive: false } : false;
+    var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
     function disableScroll(meme) {
-        // Get the current page scroll position
-        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
         post=meme;
-      
-            // if any scroll is attempted, set this to the previous value
-            window.onscroll = function() {
-                window.scrollTo(scrollLeft, scrollTop);
-            };
+        window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+        window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
     }
       
     function enableScroll() {
-        window.onscroll = function() {};
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+        window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
         post =-1;
     }
 
