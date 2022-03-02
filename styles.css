@@ -338,11 +338,11 @@ header[data-logotype="1"] .logotype:nth-child(3n){
   display: none;
 }
 
-.post[data-show-post="1"] .meme:first-child{
+.post[data-show-post="1"] .meme:nth-child(1){
   display: block;
 }
 
-.post[data-show-post="2"] .meme:last-child{
+.post[data-show-post="2"] .meme:nth-child(2){
   display: block;
 }
 
