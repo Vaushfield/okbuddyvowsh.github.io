@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,6 +23,241 @@
     />
   </head>
   <body>
-    amongus
+    <header>
+      <div class="content-container">
+        <div>
+          <h2 class="logotype longform">OKBUDDYVOWSH</h2>
+          <div class="transition-container">
+            <h2 class="logotype">O</h2>
+            <h2 class="logotype">B</h2>
+            <h2 class="logotype">V</h2>
+          </div>
+        </div>
+        <div>
+          <img src="./settings.png" class="settings" onclick="settings()" alt="">
+          <div class="spacer"></div>
+        </div>
+      </div>
+      <div class="line"></div>
+    </header>
+      <ul class="menu">
+      <li><input type="checkbox" onclick="swap()"><h3>Scroll to Zoom</h3></li>
+      <li><input type="checkbox" onclick="swap1()"><h3>Lib Mode</h3></li>
+      <li><input type="checkbox" onclick="swap2()"><h3>Remember Preferences</h3></li>
+    </ul>
+    <div class="containerh">
+      <img src="./4rtq9eedozt61.jpg" class="img" alt="">
+      <h1 class="phrase">Not a Safe Space for Anti-NATO Expansion “People”</h2>
+    </div> 
+    <div style="height: 10vh;"></div>
 </body>
+  <script>
+    post =-1;
+    settList = document.querySelectorAll("input");
+    zoom=settList[0];
+    darkMode=settList[1];
+    rememberPref=settList[2];
+
+    rememberPref.checked=localStorage.getItem("RememberPreferences") === 'true';
+    if(rememberPref.checked){
+      zoom.checked=localStorage.getItem("ScrolltoZoom") === 'true';
+      darkMode.checked=localStorage.getItem("DarkMode") === 'true';
+    }
+
+    swapv= 1+zoom.checked;
+    swap1();
+
+    var scrollableElement = document.body; //document.getElementById('scrollableElement');
+    scrollableElement.addEventListener('wheel', checkScrollDirection);
+
+    function checkScrollDirection(event) {
+      var list = document.getElementsByClassName("post");
+      meme =0;
+      container =0;
+      if(post!=-1){
+        if (checkScrollDirectionIsUp(event)) {
+          meme = parseFloat(window.getComputedStyle(post).width)+30;
+          container = parseFloat(window.getComputedStyle(post.parentElement.parentElement).width)+30;
+        }else{
+          meme = parseFloat(window.getComputedStyle(post).width)-30;
+          container = parseFloat(window.getComputedStyle(post.parentElement.parentElement).width)-30;
+        }
+        if(container+window.innerHeight*0.02>640 && container<meme+window.innerHeight*0.02){
+          post.parentElement.parentElement.style.width = container+"px";
+        }
+        post.style.width = meme+"px";
+      }
+    }
+
+    function checkScrollDirectionIsUp(event) {
+      if (event.wheelDelta) {
+        return event.wheelDelta > 0;
+      }
+      return event.deltaY < 0;
+    }
+    //Colapsing of logo
+    const SectionOne = document.querySelector(".containerh");
+    const header =document.querySelector("header");
+    const options ={
+      rootMargin:"-70px 0px 0px 0px"
+    };
+    let i=1;
+
+    const sectionObserver = new IntersectionObserver( function(entries, sectionObserver){
+      entries.forEach(entries => {
+        if(i){
+          i=0
+        }else{
+          header.setAttribute("data-logotype",+entries.isIntersecting);
+        }
+      })
+    },options);
+
+    sectionObserver.observe(SectionOne);
+
+    //Opening of settings
+    function settings(){
+      menu = document.querySelector(".menu");
+      sett = +!+menu.getAttribute("data-settings");
+      menu.setAttribute("data-settings",sett);
+    }
+
+    var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+    function preventDefault(e) {
+      e.preventDefault();
+    }
+
+    function preventDefaultForScrollKeys(e) {
+      if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+      }
+    }
+
+    // modern Chrome requires { passive: false } when adding event
+    var supportsPassive = false;
+    try {
+      window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+        get: function () { supportsPassive = true; } 
+      }));
+    } catch(e) {}
+
+    var wheelOpt = supportsPassive ? { passive: false } : false;
+    var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+
+    function disableScroll(meme) {
+        post=meme;
+        window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+        window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+    }
+      
+    function enableScroll() {
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+        window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
+        post =-1;
+    }
+
+    function swap(){
+      swapv= 1+zoom.checked;
+      elementList = document.querySelectorAll(".post");
+      for (var i=0; i<elementList.length; i++){
+        data =elementList[i].getAttribute("data-show-post");
+        if(data!=0){
+          elementList[i].setAttribute("data-show-post",swapv);
+          resize(elementList[i]);
+        }
+      }
+      if(rememberPref.checked){
+        localStorage.setItem("ScrolltoZoom",zoom.checked);
+      }
+    }
+    
+    function swap1(){
+      var darkValues =[
+        {variableName: "--bg-color", variableValue:"rgb(30, 30, 30)"},
+        {variableName: "--txt-color", variableValue:"rgb(255, 255, 255)"},
+        {variableName: "--detail-color", variableValue:"rgb(60, 60, 60)"},
+        {variableName: "--bg-gray", variableValue:"rgb(0, 0, 0)"},
+        {variableName: "--bg-darkgray", variableValue:"rgb(50, 50, 50)"},
+        {variableName: "--bg-image", variableValue:"url(./evs1t6179dn71.png)"},
+        {variableName: "--invert", variableValue:"1"},
+        {variableName: "--flair", variableValue:"none"}
+      ];
+
+      var lightValues =[
+        {variableName: "--bg-color", variableValue:"rgb(255, 255, 255)"},
+        {variableName: "--txt-color", variableValue:"rgb(0,0,0)"},
+        {variableName: "--detail-color", variableValue:"rgb(221, 221, 221)"},
+        {variableName: "--bg-gray", variableValue:"rgb(245, 245, 245)"},
+        {variableName: "--bg-darkgray", variableValue:"rgb(232, 232, 232)"},
+        {variableName: "--bg-image", variableValue:"url(./okb1t6179dn71.png)"},
+        {variableName: "--invert", variableValue:"0"},
+        {variableName: "--flair", variableValue:"inline-block"}
+      ];
+
+      var tempValues;
+
+      if(darkMode.checked){
+        tempValues=darkValues;
+      }else{
+        tempValues=lightValues;
+      }
+      for(var i=0;i<darkValues.length;i++){
+        document.documentElement.style.setProperty(tempValues[i].variableName,tempValues[i].variableValue);
+      }
+      if(rememberPref.checked){
+        localStorage.setItem("DarkMode",darkMode.checked);
+      }
+    }
+
+    function swap2(){
+      localStorage.setItem("RememberPreferences",rememberPref.checked);
+      if(rememberPref.checked){
+        localStorage.setItem("ScrolltoZoom",zoom.checked);
+        localStorage.setItem("DarkMode",darkMode.checked);
+      }
+      else{
+        localStorage.setItem("ScrolltoZoom",false);
+        localStorage.setItem("DarkMode",false);
+      }
+    }
+
+    function showhidefunc(button){
+      showhide =button.parentElement.parentElement.parentElement;
+      if(showhide.getAttribute("data-show-post")==0){
+        showhide.setAttribute("data-show-post",swapv);
+        button.querySelector(".author").innerText="hide post";
+      }else{
+        showhide.setAttribute("data-show-post",0);
+        button.querySelector(".author").innerText="show post";
+      }
+      resize(showhide);
+    }
+
+    document.addEventListener('click', function(e) {
+        var container = document.querySelector(".menu");
+        var settButton = document.querySelector(".settings");
+        if (!container.contains(e.target)&&!settButton.contains(e.target)&&container.getAttribute("data-settings")!=null) {
+          container.setAttribute("data-settings",0);
+        }
+    });
+
+    function resize(resizeme){
+      resizeme.querySelector(".container").style.width="640px";
+      resizelist = resizeme.getElementsByClassName("meme");
+      if(resizelist.length<2){
+        return 0;
+      }
+      resizeme = resizelist[1];
+      if(swapv==2){
+        aspectratio = resizeme.clientWidth/resizeme.clientHeight;
+        if(aspectratio >= 1){
+            resizeme.style.width="640px";
+        }else{
+            resizeme.style.width=640*aspectratio+"px";
+        }
+      }
+    }
+  </script>
 </html>
