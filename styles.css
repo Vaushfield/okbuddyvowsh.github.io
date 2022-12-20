@@ -257,7 +257,7 @@ header[data-logotype="1"] .logotype:nth-child(3n){
 }
 
 .img {
-  height: max(300px, 45vh);
+  height: max(107px, 16vh);
 }
 .phrase{
   font-family: "Montserrat", sans-serif;
