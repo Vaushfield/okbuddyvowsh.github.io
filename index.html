@@ -4731,6 +4731,8 @@
     zoom=settList[0];
     darkMode=settList[1];
     rememberPref=settList[2];
+    
+    zoom.checked=true;
 
     rememberPref.checked=localStorage.getItem("RememberPreferences") === 'true';
     if(rememberPref.checked){
